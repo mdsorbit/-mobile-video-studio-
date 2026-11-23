@@ -4,13 +4,13 @@
 :root{color-scheme:dark;--bg:#080d1b;--line:#263653;--muted:#9aabc5;--text:#f4f7ff;--blue:#5c8dff}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#1c3155 0%,var(--bg) 52%);color:var(--text);font:15px/1.45 system-ui,sans-serif;min-height:100vh}header{padding:22px 18px 14px;max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{display:flex;align-items:center;gap:11px}.logo{width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,#6d8fff,#47d8df);display:grid;place-items:center;color:#07101f;font-weight:900;font-size:21px}.brand h1{font-size:18px;margin:0}.brand p{margin:2px 0 0;color:var(--muted);font-size:12px}.tag{border:1px solid var(--line);border-radius:30px;padding:7px 10px;color:#b9c9e2;font-size:11px}main{max-width:1100px;margin:auto;padding:8px 16px 36px;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(300px,.95fr);gap:18px}.panel{background:linear-gradient(160deg,#121e33ee,#0d1729f2);border:1px solid var(--line);border-radius:20px;padding:16px;box-shadow:0 18px 55px #0003}.preview-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.preview-head strong{font-size:14px}.live{font-size:11px;color:#73e4c3}.stage{width:min(100%,340px);margin:0 auto;aspect-ratio:9/16;background:#050914;border:1px solid #344766;border-radius:16px;overflow:hidden}.stage canvas{width:100%;height:100%;display:block}.preview-note{text-align:center;color:var(--muted);font-size:11px;margin:12px 0 0}.section-title{font-size:13px;font-weight:750;margin:0 0 11px;color:#dce7fb}.field{margin-bottom:15px}.field label{display:block;color:#aebed6;font-size:12px;margin-bottom:7px}.field input,.field select{width:100%;background:#091326;border:1px solid #2b3d5b;border-radius:11px;color:#f4f7ff;padding:12px 13px;font:inherit;outline:none}.field input:focus,.field select:focus{border-color:var(--blue)}.styles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.style-btn{border:1px solid #2b3d5b;background:#0a1427;color:#c5d3e8;border-radius:12px;padding:10px 5px;font-size:12px;cursor:pointer}.style-btn span{display:block;font-size:20px;margin-bottom:3px}.style-btn.active{border-color:#6e9aff;background:#1a2d50;color:white}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}.btn{border:0;border-radius:12px;padding:13px 12px;font:700 13px system-ui;cursor:pointer}.btn:disabled{opacity:.45;cursor:not-allowed}.primary{background:linear-gradient(120deg,#6d8fff,#55d5df);color:#07101f}.secondary{background:#1b2a43;color:#e6efff;border:1px solid #344969}.status{min-height:35px;margin-top:12px;padding:9px 11px;border-radius:10px;background:#091426;color:#aebed6;font-size:11px;border:1px solid #20314c}.status.error{color:#ffb7b7;border-color:#713c4a}.status.ok{color:#8ce5c7;border-color:#285c53}.hint{margin:14px 0 0;color:#91a4c1;font-size:11px;line-height:1.55}.hint b{color:#cbd8eb}footer{text-align:center;color:#667994;font-size:11px;padding:0 16px 24px}@media(max-width:760px){main{grid-template-columns:1fr;padding:5px 12px 28px;gap:12px}header{padding:16px 14px 12px}.panel{padding:14px}.stage{width:min(100%,290px)}.brand h1{font-size:16px}}
 .upload{display:block;width:100%;padding:11px;background:#091326;border:1px dashed #3b5275;border-radius:11px;color:#cbd8eb;font:12px system-ui}.upload input{display:block;width:100%;margin-top:7px;color:#aebed6;font-size:11px}.mini{font-size:10px;color:#8196b5;margin-top:5px}</style></head><body>
 <header><div class="brand"><div class="logo">V</div><div><h1>Mobile Video Studio</h1><p>Make vertical motion videos on your phone</p></div></div><div class="tag">FREE · NO LOGIN</div></header>
-<main><section class="panel"><div class="preview-head"><strong>Video preview</strong><span class="live">● LIVE PREVIEW</span></div><div class="stage"><canvas id="canvas" width="720" height="1280"></canvas></div><p class="preview-note">Vertical 9:16 · 720 × 1280 canvas</p></section>
+<main><section class="panel"><div class="preview-head"><strong>Video preview</strong><span class="live">● LIVE PREVIEW</span></div><div class="stage"><canvas id="canvas" width="720" height="1280"></canvas><canvas id="threeCanvas" width="720" height="1280" style="display:none"></canvas></div><p class="preview-note">Vertical 9:16 · 720 × 1280 canvas</p></section>
 <section class="panel"><h2 class="section-title">Create your scene</h2>
 <div class="field"><label for="headline">Main title</label><input id="headline" maxlength="42" value="THE WORLD IS YOURS" placeholder="Enter your title"></div>
 <div class="field"><label for="subline">Subtitle</label><input id="subline" maxlength="70" value="Create something extraordinary" placeholder="Add a short line"></div>
 <div class="field"><label>Visual style</label><div class="styles"><button class="style-btn active" data-style="cinematic"><span>🎬</span>Cinematic</button><button class="style-btn" data-style="space"><span>🌌</span>Space</button><button class="style-btn" data-style="neon"><span>⚡</span>Neon</button></div></div>
 <div class="row">
-<div class="field"><label for="sceneMode">Scene type</label><select id="sceneMode"><option value="motion">Motion graphics</option><option value="cartoon">2D Cartoon Story</option></select></div>
+<div class="field"><label for="sceneMode">Scene type</label><select id="sceneMode"><option value="motion">Motion graphics</option><option value="cartoon">2D Cartoon Story</option><option value="3d">3D Cartoon Studio</option></select></div>
 <div class="field"><label for="character">Cartoon character</label><select id="character"><option value="boydog">Boy + Dog</option><option value="cat">Cute Cat</option><option value="robot">Friendly Robot</option></select></div>
 </div>
 <div class="row"><div class="field"><label for="duration">Video length</label><select id="duration"><option value="10">10 seconds</option><option value="15" selected>15 seconds</option><option value="20">20 seconds</option><option value="30">30 seconds</option></select></div><div class="field"><label for="speed">Motion speed</label><select id="speed"><option value=".6">Slow</option><option value="1" selected>Normal</option><option value="1.6">Fast</option></select></div></div>
@@ -20,11 +20,103 @@
 </div>
 <div class="field"><label for="bgUpload">Custom photo background</label><div class="upload">Choose an image from your phone<input id="bgUpload" type="file" accept="image/*"></div><div class="mini">Your photo stays in this browser session and is not uploaded to a server.</div></div>
 <div class="actions"><button id="record" class="btn primary">● Record video</button><button id="stop" class="btn secondary" disabled>Stop recording</button></div>
-<div id="status" class="status" role="status">Ready. Choose Motion Graphics or 2D Cartoon Story, customize, then record.</div><p class="hint"><b>How it works:</b> Your browser draws the animation and records it as a WebM video. When recording finishes, a Save video button appears. No account or paid API is required.</p>
-<div id="download-wrap" style="display:none;margin-top:12px"><button id="download" class="btn primary" style="width:100%">↓ Save video to phone</button></div></section></main><footer>Mobile Video Studio · Cartoon mode + motion graphics · Version 1.1</footer>
+<div id="status" class="status" role="status">Ready. Choose Motion Graphics, 2D Cartoon or 3D Cartoon Studio.</div><p class="hint"><b>How it works:</b> Your browser draws 2D or 3D animation and records it as a WebM video. When recording finishes, a Save video button appears. No account or paid API is required.</p>
+<div id="download-wrap" style="display:none;margin-top:12px"><button id="download" class="btn primary" style="width:100%">↓ Save video to phone</button></div></section></main><footer>Mobile Video Studio · 2D + 3D Cartoon Studio · Version 1.2</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 (()=>{
-const canvas=document.getElementById('canvas'),ctx=canvas.getContext('2d'),$=id=>document.getElementById(id);let style='cinematic',start=performance.now(),recorder=null,chunks=[],recording=false,autoStop=null,videoUrl=null,bgImage=null;const W=canvas.width,H=canvas.height;
+const canvas=document.getElementById('canvas'),ctx=canvas.getContext('2d'),threeCanvas=document.getElementById('threeCanvas'),$=id=>document.getElementById(id);let style='cinematic',start=performance.now(),recorder=null,chunks=[],recording=false,autoStop=null,videoUrl=null,bgImage=null;const W=canvas.width,H=canvas.height;
+
+let threeRenderer=null,threeScene=null,threeCamera=null,threeActors={},threeClock=0,threeTitle=null;
+function makeMesh(g,m,x=0,y=0,z=0){const o=new THREE.Mesh(g,m);o.position.set(x,y,z);o.castShadow=true;o.receiveShadow=true;return o}
+function mat(color,roughness=.75){return new THREE.MeshStandardMaterial({color,roughness})}
+function limb(parent,x,y,z,len,r,color){const pivot=new THREE.Group();pivot.position.set(x,y,z);const mesh=makeMesh(new THREE.CylinderGeometry(r*.72,r,len,16),mat(color),0,-len/2,0);pivot.add(mesh);parent.add(pivot);return pivot}
+function ball(parent,x,y,z,sx,sy,sz,color){const o=makeMesh(new THREE.SphereGeometry(1,24,18),mat(color),x,y,z);o.scale.set(sx,sy,sz);parent.add(o);return o}
+function makeBoy(){
+ const g=new THREE.Group(),skin=0xf0bd91,shirt=0xf06458,hair=0x493326,blue=0x324e86;
+ ball(g,0,1.38,0,.42,.47,.38,skin);ball(g,0,1.69,-.015,.43,.23,.39,hair);
+ ball(g,-.15,1.42,.34,.045,.06,.035,0x202b3d);ball(g,.15,1.42,.34,.045,.06,.035,0x202b3d);
+ ball(g,0,1.08,0,.34,.47,.25,shirt);
+ const arms=[limb(g,-.39,1.32,0,.62,.105,skin),limb(g,.39,1.32,0,.62,.105,skin)];
+ const legs=[limb(g,-.17,.68,0,.58,.12,blue),limb(g,.17,.68,0,.58,.12,blue)];
+ ball(g,-.17,.09,.07,.19,.1,.28,0x292b36);ball(g,.17,.09,.07,.19,.1,.28,0x292b36);
+ return {group:g,arms,legs};
+}
+function makeDog(){
+ const g=new THREE.Group();ball(g,0,.48,0,.55,.34,.32,0xb77a45);ball(g,.43,.79,.02,.34,.32,.3,0xc48a52);
+ ball(g,.23,1.03,-.02,.13,.29,.12,0x8a4f35);ball(g,.61,1.03,-.02,.13,.29,.12,0x8a4f35);
+ ball(g,.55,.82,.29,.045,.05,.035,0x20232d);ball(g,.77,.69,.22,.08,.06,.07,0x25242a);
+ const legs=[limb(g,-.32,.3,0,.48,.09,0x89542f),limb(g,.27,.3,0,.48,.09,0x89542f)];
+ const tail=limb(g,-.53,.58,0,.38,.07,0xb77a45);tail.rotation.z=-1.2;
+ return {group:g,legs,tail};
+}
+function makeCat(){
+ const g=new THREE.Group();ball(g,0,.65,0,.49,.53,.36,0xf0a44a);
+ ball(g,-.3,1.04,0,.19,.29,.13,0xf0a44a);ball(g,.3,1.04,0,.19,.29,.13,0xf0a44a);
+ ball(g,-.16,.73,.32,.045,.065,.035,0x202b3d);ball(g,.16,.73,.32,.045,.065,.035,0x202b3d);
+ ball(g,0,.55,.34,.07,.05,.04,0xe77b86);
+ const tail=limb(g,.43,.5,0,.65,.075,0xf0a44a);tail.rotation.z=-1.4;
+ return {group:g,tail};
+}
+function makeRobot(){
+ const g=new THREE.Group();ball(g,0,.85,0,.48,.56,.35,0x4ccbc8);
+ ball(g,0,1.68,0,.43,.4,.34,0x53d8d1);
+ ball(g,-.15,1.7,.3,.06,.075,.04,0xc7fbff);ball(g,.15,1.7,.3,.06,.075,.04,0xc7fbff);
+ const arms=[limb(g,-.48,1.1,0,.7,.12,0x43aaa9),limb(g,.48,1.1,0,.7,.12,0x43aaa9)];
+ const legs=[limb(g,-.2,.42,0,.48,.13,0x327d91),limb(g,.2,.42,0,.48,.13,0x327d91)];
+ ball(g,0,2.15,0,.06,.2,.06,0x4ccbc8);ball(g,0,2.34,0,.13,.13,.13,0xffd45d);
+ return {group:g,arms,legs};
+}
+function setup3D(){
+ if(!window.THREE){status('3D library could not load. Check your internet connection and reload.','error');return false}
+ try{
+  threeRenderer=new THREE.WebGLRenderer({canvas:threeCanvas,antialias:true,alpha:false,preserveDrawingBuffer:true});
+  threeRenderer.setPixelRatio(1);threeRenderer.setSize(720,1280,false);threeRenderer.setClearColor(0x91d8ff,1);
+  threeScene=new THREE.Scene();threeScene.background=new THREE.Color(0x91d8ff);threeScene.fog=new THREE.Fog(0x91d8ff,10,24);
+  threeCamera=new THREE.PerspectiveCamera(34,720/1280,.1,100);threeCamera.position.set(0,2.6,10.5);threeCamera.lookAt(0,1.1,0);
+  threeScene.add(new THREE.HemisphereLight(0xffffff,0x63825b,2));
+  const sun=new THREE.DirectionalLight(0xffffff,2.2);sun.position.set(-4,8,7);threeScene.add(sun);
+  const floor=makeMesh(new THREE.PlaneGeometry(40,40),mat(0x69b86e),0,-.1,0);floor.rotation.x=-Math.PI/2;threeScene.add(floor);
+  const hillMat=mat(0x4b9c5b);for(let i=0;i<5;i++){let h=makeMesh(new THREE.SphereGeometry(1,24,18),hillMat,(i-2)*3,-.25,-3-Math.random()*2);h.scale.set(2.7,1.1,1.3);threeScene.add(h)}
+  const sunBall=makeMesh(new THREE.SphereGeometry(.62,24,18),mat(0xffe8a1),3.2,4.1,-3);threeScene.add(sunBall);
+  threeActors.boy=makeBoy();threeActors.dog=makeDog();threeActors.cat=makeCat();threeActors.robot=makeRobot();
+  threeActors.boy.group.position.set(-.95,0,0);threeActors.dog.group.position.set(1.05,0,.2);
+  threeActors.cat.group.position.set(0,0,0);threeActors.robot.group.position.set(0,0,0);
+  Object.values(threeActors).forEach(a=>threeScene.add(a.group));
+  const label=document.createElement('canvas');label.width=640;label.height=110;const lctx=label.getContext('2d');lctx.fillStyle='rgba(15,43,75,.76)';lctx.roundRect(0,0,640,110,24);lctx.fill();lctx.fillStyle='#ffffff';lctx.font='bold 42px system-ui';lctx.textAlign='center';lctx.fillText('3D CARTOON STORY',320,70);
+  const texture=new THREE.CanvasTexture(label);threeTitle=new THREE.Sprite(new THREE.SpriteMaterial({map:texture,transparent:true}));threeTitle.scale.set(4.8,.83,1);threeTitle.position.set(0,3.65,0);threeScene.add(threeTitle);
+  update3DCharacter();return true;
+ }catch(e){status('3D setup failed: '+e.message,'error');return false}
+}
+function update3DCharacter(){
+ if(!threeActors.boy)return;
+ const pick=$('character').value;
+ Object.entries(threeActors).forEach(([k,a])=>a.group.visible=pick==='boydog'?(k==='boy'||k==='dog'):k===pick);
+}
+function render3D(){
+ if(threeRenderer&&threeScene){
+  const t=(performance.now()-start)/1000*+$('speed').value;
+  const boy=threeActors.boy,dog=threeActors.dog,cat=threeActors.cat,robot=threeActors.robot;
+  [boy,dog,cat,robot].forEach(a=>{a.group.position.y=Math.abs(Math.sin(t*5))*.055});
+  boy.legs.forEach((p,i)=>p.rotation.x=Math.sin(t*7+i*Math.PI)*.55);
+  boy.arms.forEach((p,i)=>p.rotation.z=Math.sin(t*7+i*Math.PI)*.25);
+  dog.legs.forEach((p,i)=>p.rotation.x=Math.sin(t*8+i*Math.PI)*.4);
+  dog.tail.rotation.x=Math.sin(t*5)*.6;
+  cat.tail.rotation.x=Math.sin(t*4)*.5;
+  robot.legs.forEach((p,i)=>p.rotation.x=Math.sin(t*6+i*Math.PI)*.25);
+  robot.arms.forEach((p,i)=>p.rotation.z=Math.sin(t*5+i*Math.PI)*.35);
+  threeCamera.position.x=Math.sin(t*.35)*.18;threeCamera.lookAt(0,1.2,0);
+  threeRenderer.render(threeScene,threeCamera);
+ }
+ requestAnimationFrame(render3D);
+}
+function switchSceneMode(){
+ const mode=$('sceneMode').value,is3d=mode==='3d';
+ canvas.style.display=is3d?'none':'block';threeCanvas.style.display=is3d?'block':'none';
+ if(mode==='3d'&&!threeRenderer){if(!setup3D()){$('sceneMode').value='cartoon';canvas.style.display='block';threeCanvas.style.display='none';return}}
+ if(is3d)update3DCharacter();
+}
+
 const effectBits=Array.from({length:90},()=>({x:Math.random()*W,y:Math.random()*H,v:Math.random()*5+2,r:Math.random()*4+1,p:Math.random()*6.28}));const stars=Array.from({length:100},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*2+.5,p:Math.random()*6.28}));const particles=Array.from({length:42},()=>({x:Math.random()*W,y:Math.random()*H,s:Math.random()*3+1,v:Math.random()*1.3+.3,a:Math.random()*.6+.2}));
 
 function drawCartoon(time){
@@ -103,11 +195,12 @@ if(anim==='zoom')scale=.65+Math.min(.35,time/2);
 ctx.save();ctx.globalAlpha=alpha;ctx.translate(W/2,H*.70+Math.sin(time*1.2)*7);ctx.scale(scale,scale);ctx.textAlign='center';ctx.shadowColor=style==='neon'?'#4deaff':'#000';ctx.shadowBlur=style==='neon'?30:18;ctx.fillStyle='#fff';ctx.font=fit(title,600,'800 68px system-ui');ctx.fillText(title,0,0);
 if(anim==='glitch'&&Math.floor(time*8)%3===0){ctx.globalAlpha=.55;ctx.fillStyle='#ff3d9a';ctx.fillText(title,5,-4);ctx.fillStyle='#35eaff';ctx.fillText(title,-5,4)}
 ctx.shadowBlur=0;ctx.globalAlpha=alpha;ctx.fillStyle='#d8e7fa';ctx.font='30px system-ui';let sub=$('subline').value.trim();if(sub)ctx.fillText(sub,0,62);ctx.restore();ctx.fillStyle='#ffffff88';ctx.font='18px system-ui';ctx.fillText('MOBILE VIDEO STUDIO',W/2,H-74);ctx.textAlign='left';requestAnimationFrame(draw)}
-requestAnimationFrame(draw);
+requestAnimationFrame(draw);requestAnimationFrame(render3D);
+$('sceneMode').addEventListener('change',switchSceneMode);$('character').addEventListener('change',update3DCharacter);
 $('bgUpload').addEventListener('change',e=>{const file=e.target.files&&e.target.files[0];if(!file)return;if(!file.type.startsWith('image/')){status('Please choose an image file.','error');return}const reader=new FileReader();reader.onload=()=>{const img=new Image();img.onload=()=>{bgImage=img;status('Custom background added to your preview.','ok')};img.onerror=()=>status('Could not load that image.','error');img.src=reader.result};reader.readAsDataURL(file)});
 document.querySelectorAll('.style-btn').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.style-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');style=b.dataset.style}));
 function status(msg,type=''){const s=$('status');s.textContent=msg;s.className='status '+type}function supportedMime(){return ['video/webm;codecs=vp9','video/webm;codecs=vp8','video/webm'].find(m=>window.MediaRecorder&&MediaRecorder.isTypeSupported(m))}
-$('record').addEventListener('click',()=>{if(!canvas.captureStream||!window.MediaRecorder){status('This browser cannot record canvas video. Try the latest Chrome browser on Android.','error');return}const mime=supportedMime();if(!mime){status('WebM recording is not supported in this browser. Try Chrome.','error');return}try{chunks=[];const stream=canvas.captureStream(30);recorder=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:5000000});recorder.ondataavailable=e=>{if(e.data&&e.data.size)chunks.push(e.data)};recorder.onerror=()=>status('Recording failed. Please try again.','error');recorder.onstop=()=>{stream.getTracks().forEach(t=>t.stop());recording=false;$('record').disabled=false;$('stop').disabled=true;clearTimeout(autoStop);const blob=new Blob(chunks,{type:mime});if(videoUrl)URL.revokeObjectURL(videoUrl);videoUrl=URL.createObjectURL(blob);$('download-wrap').style.display='block';status('Your video is ready. Tap “Save video to phone”.','ok')};start=performance.now();recorder.start(250);recording=true;$('record').disabled=true;$('stop').disabled=false;$('download-wrap').style.display='none';const secs=+$('duration').value;status('Recording… '+secs+' seconds. Keep this page open.');autoStop=setTimeout(()=>{if(recording&&recorder.state==='recording')recorder.stop()},secs*1000)}catch(e){status('Could not start recording: '+e.message,'error')}});
+$('record').addEventListener('click',()=>{if(!canvas.captureStream||!window.MediaRecorder){status('This browser cannot record canvas video. Try the latest Chrome browser on Android.','error');return}const mime=supportedMime();if(!mime){status('WebM recording is not supported in this browser. Try Chrome.','error');return}try{chunks=[];const activeCanvas=$('sceneMode').value==='3d'?threeCanvas:canvas;const stream=activeCanvas.captureStream(30);recorder=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:5000000});recorder.ondataavailable=e=>{if(e.data&&e.data.size)chunks.push(e.data)};recorder.onerror=()=>status('Recording failed. Please try again.','error');recorder.onstop=()=>{stream.getTracks().forEach(t=>t.stop());recording=false;$('record').disabled=false;$('stop').disabled=true;clearTimeout(autoStop);const blob=new Blob(chunks,{type:mime});if(videoUrl)URL.revokeObjectURL(videoUrl);videoUrl=URL.createObjectURL(blob);$('download-wrap').style.display='block';status('Your video is ready. Tap “Save video to phone”.','ok')};start=performance.now();recorder.start(250);recording=true;$('record').disabled=true;$('stop').disabled=false;$('download-wrap').style.display='none';const secs=+$('duration').value;status('Recording… '+secs+' seconds. Keep this page open.');autoStop=setTimeout(()=>{if(recording&&recorder.state==='recording')recorder.stop()},secs*1000)}catch(e){status('Could not start recording: '+e.message,'error')}});
 $('stop').addEventListener('click',()=>{if(recording&&recorder&&recorder.state==='recording')recorder.stop()});$('download').addEventListener('click',()=>{if(!videoUrl)return;const a=document.createElement('a');a.href=videoUrl;a.download='mobile-video-studio-'+Date.now()+'.webm';document.body.appendChild(a);a.click();a.remove();status('Download started. Check your phone Downloads or browser files.','ok')});
 })();
 </script></body></html>
