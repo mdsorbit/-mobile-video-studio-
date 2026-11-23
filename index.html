@@ -9,6 +9,10 @@
 <div class="field"><label for="headline">Main title</label><input id="headline" maxlength="42" value="THE WORLD IS YOURS" placeholder="Enter your title"></div>
 <div class="field"><label for="subline">Subtitle</label><input id="subline" maxlength="70" value="Create something extraordinary" placeholder="Add a short line"></div>
 <div class="field"><label>Visual style</label><div class="styles"><button class="style-btn active" data-style="cinematic"><span>🎬</span>Cinematic</button><button class="style-btn" data-style="space"><span>🌌</span>Space</button><button class="style-btn" data-style="neon"><span>⚡</span>Neon</button></div></div>
+<div class="row">
+<div class="field"><label for="sceneMode">Scene type</label><select id="sceneMode"><option value="motion">Motion graphics</option><option value="cartoon">2D Cartoon Story</option></select></div>
+<div class="field"><label for="character">Cartoon character</label><select id="character"><option value="boydog">Boy + Dog</option><option value="cat">Cute Cat</option><option value="robot">Friendly Robot</option></select></div>
+</div>
 <div class="row"><div class="field"><label for="duration">Video length</label><select id="duration"><option value="10">10 seconds</option><option value="15" selected>15 seconds</option><option value="20">20 seconds</option><option value="30">30 seconds</option></select></div><div class="field"><label for="speed">Motion speed</label><select id="speed"><option value=".6">Slow</option><option value="1" selected>Normal</option><option value="1.6">Fast</option></select></div></div>
 <div class="row">
 <div class="field"><label for="effect">Visual effects</label><select id="effect"><option value="none">No extra effect</option><option value="glitch">Glitch</option><option value="fire">Fire sparks</option><option value="rain">Rain</option><option value="smoke">Smoke</option><option value="particles">Particles</option></select></div>
@@ -16,12 +20,68 @@
 </div>
 <div class="field"><label for="bgUpload">Custom photo background</label><div class="upload">Choose an image from your phone<input id="bgUpload" type="file" accept="image/*"></div><div class="mini">Your photo stays in this browser session and is not uploaded to a server.</div></div>
 <div class="actions"><button id="record" class="btn primary">● Record video</button><button id="stop" class="btn secondary" disabled>Stop recording</button></div>
-<div id="status" class="status" role="status">Ready. Customize the text and style, then record your video.</div><p class="hint"><b>How it works:</b> Your browser draws the animation and records it as a WebM video. When recording finishes, a Save video button appears. No account or paid API is required.</p>
-<div id="download-wrap" style="display:none;margin-top:12px"><button id="download" class="btn primary" style="width:100%">↓ Save video to phone</button></div></section></main><footer>Mobile Video Studio · Runs locally in your browser · Version 1.0</footer>
+<div id="status" class="status" role="status">Ready. Choose Motion Graphics or 2D Cartoon Story, customize, then record.</div><p class="hint"><b>How it works:</b> Your browser draws the animation and records it as a WebM video. When recording finishes, a Save video button appears. No account or paid API is required.</p>
+<div id="download-wrap" style="display:none;margin-top:12px"><button id="download" class="btn primary" style="width:100%">↓ Save video to phone</button></div></section></main><footer>Mobile Video Studio · Cartoon mode + motion graphics · Version 1.1</footer>
 <script>
 (()=>{
 const canvas=document.getElementById('canvas'),ctx=canvas.getContext('2d'),$=id=>document.getElementById(id);let style='cinematic',start=performance.now(),recorder=null,chunks=[],recording=false,autoStop=null,videoUrl=null,bgImage=null;const W=canvas.width,H=canvas.height;
 const effectBits=Array.from({length:90},()=>({x:Math.random()*W,y:Math.random()*H,v:Math.random()*5+2,r:Math.random()*4+1,p:Math.random()*6.28}));const stars=Array.from({length:100},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*2+.5,p:Math.random()*6.28}));const particles=Array.from({length:42},()=>({x:Math.random()*W,y:Math.random()*H,s:Math.random()*3+1,v:Math.random()*1.3+.3,a:Math.random()*.6+.2}));
+
+function drawCartoon(time){
+  const mode=$('character').value, walk=Math.sin(time*7)*22, bob=Math.sin(time*14)*5;
+  // storybook sky and rolling hills
+  ctx.fillStyle='#8bd4ff';ctx.fillRect(0,0,W,H);
+  ctx.fillStyle='#fff4bd';ctx.beginPath();ctx.arc(570,205,75,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#6fc47e';ctx.beginPath();ctx.ellipse(140,890,420,250,0,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#45a968';ctx.beginPath();ctx.ellipse(620,930,440,290,0,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#d9b77d';ctx.beginPath();ctx.moveTo(285,1280);ctx.quadraticCurveTo(250,1000,420,900);ctx.quadraticCurveTo(560,810,720,820);ctx.lineTo(720,1280);ctx.fill();
+  // clouds
+  for(let i=0;i<3;i++){let x=((i*270+time*18)%900)-80,y=210+i*90;ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(x,y,38,0,Math.PI*2);ctx.arc(x+38,y-18,48,0,Math.PI*2);ctx.arc(x+82,y,35,0,Math.PI*2);ctx.fill()}
+  if(mode==='boydog'){
+    let x=275,y=655+bob;
+    // legs and shoes
+    ctx.lineCap='round';ctx.strokeStyle='#28416f';ctx.lineWidth=34;
+    ctx.beginPath();ctx.moveTo(x-22,y+245);ctx.lineTo(x-35+walk,y+340);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(x+22,y+245);ctx.lineTo(x+35-walk,y+340);ctx.stroke();
+    ctx.fillStyle='#513b32';ctx.beginPath();ctx.ellipse(x-48+walk,y+344,38,17,0,0,Math.PI*2);ctx.ellipse(x+28-walk,y+344,38,17,0,0,Math.PI*2);ctx.fill();
+    // body and arms
+    ctx.fillStyle='#ef705c';ctx.beginPath();ctx.roundRect(x-72,y+105,144,170,35);ctx.fill();
+    ctx.strokeStyle='#edb98f';ctx.lineWidth=25;ctx.beginPath();ctx.moveTo(x-62,y+135);ctx.lineTo(x-110,y+210+walk*.4);ctx.moveTo(x+62,y+135);ctx.lineTo(x+110,y+205-walk*.4);ctx.stroke();
+    // head
+    ctx.fillStyle='#f2c49b';ctx.beginPath();ctx.arc(x,y+45,82,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#563b2e';ctx.beginPath();ctx.arc(x,y+5,85,Math.PI,Math.PI*2);ctx.arc(x-48,y+20,38,Math.PI,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#263344';ctx.beginPath();ctx.arc(x-27,y+50,8,0,Math.PI*2);ctx.arc(x+27,y+50,8,0,Math.PI*2);ctx.fill();
+    ctx.strokeStyle='#9b4c49';ctx.lineWidth=5;ctx.beginPath();ctx.arc(x,y+62,25,.15,Math.PI-.15);ctx.stroke();
+    // dog
+    let dx=500+Math.sin(time*2)*16,dy=1000+Math.sin(time*14+1)*5;
+    ctx.fillStyle='#b77a45';ctx.beginPath();ctx.ellipse(dx,dy,95,48,0,0,Math.PI*2);ctx.arc(dx+75,dy-45,52,0,Math.PI*2);ctx.fill();
+    ctx.beginPath();ctx.ellipse(dx+48,dy-100,22,48,-.25,0,Math.PI*2);ctx.ellipse(dx+104,dy-100,22,48,.25,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#292b34';ctx.beginPath();ctx.arc(dx+92,dy-55,7,0,Math.PI*2);ctx.arc(dx+120,dy-30,9,0,Math.PI*2);ctx.fill();
+    ctx.strokeStyle='#8b542f';ctx.lineWidth=17;ctx.beginPath();ctx.moveTo(dx-55,dy+25);ctx.lineTo(dx-65+walk*.4,dy+90);ctx.moveTo(dx+45,dy+25);ctx.lineTo(dx+50-walk*.4,dy+90);ctx.stroke();
+  } else if(mode==='cat'){
+    let x=360,y=830+bob;
+    ctx.fillStyle='#f3a64c';ctx.beginPath();ctx.ellipse(x,y,125,145,0,0,Math.PI*2);ctx.fill();
+    ctx.beginPath();ctx.moveTo(x-100,y-85);ctx.lineTo(x-115,y-205);ctx.lineTo(x-25,y-130);ctx.fill();
+    ctx.beginPath();ctx.moveTo(x+100,y-85);ctx.lineTo(x+115,y-205);ctx.lineTo(x+25,y-130);ctx.fill();
+    ctx.fillStyle='#fff';ctx.beginPath();ctx.ellipse(x-45,y-30,19,28,0,0,Math.PI*2);ctx.ellipse(x+45,y-30,19,28,0,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#263344';ctx.beginPath();ctx.arc(x-45,y-25,8,0,Math.PI*2);ctx.arc(x+45,y-25,8,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#e97c83';ctx.beginPath();ctx.moveTo(x-13,y+12);ctx.lineTo(x+13,y+12);ctx.lineTo(x,y+28);ctx.fill();
+    ctx.strokeStyle='#fff';ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(x-15,y+26);ctx.lineTo(x-110,y+12);ctx.moveTo(x+15,y+26);ctx.lineTo(x+110,y+12);ctx.stroke();
+    ctx.strokeStyle='#b77a45';ctx.lineWidth=20;ctx.beginPath();ctx.moveTo(x+105,y+75);ctx.quadraticCurveTo(x+205,y+30+walk,x+175,y-55);ctx.stroke();
+  } else {
+    let x=360,y=790+bob;
+    ctx.fillStyle='#5ad6d0';ctx.beginPath();ctx.roundRect(x-105,y-120,210,250,45);ctx.fill();
+    ctx.fillStyle='#263b5a';ctx.beginPath();ctx.roundRect(x-70,y-65,140,85,22);ctx.fill();
+    ctx.fillStyle='#a9f7ff';ctx.beginPath();ctx.arc(x-32,y-23,13,0,Math.PI*2);ctx.arc(x+32,y-23,13,0,Math.PI*2);ctx.fill();
+    ctx.strokeStyle='#5ad6d0';ctx.lineWidth=25;ctx.beginPath();ctx.moveTo(x-100,y-55);ctx.lineTo(x-165,y+30+walk*.3);ctx.moveTo(x+100,y-55);ctx.lineTo(x+165,y+30-walk*.3);ctx.stroke();
+    ctx.strokeStyle='#3a7797';ctx.lineWidth=28;ctx.beginPath();ctx.moveTo(x-55,y+125);ctx.lineTo(x-75+walk,y+225);ctx.moveTo(x+55,y+125);ctx.lineTo(x+75-walk,y+225);ctx.stroke();
+    ctx.strokeStyle='#5ad6d0';ctx.lineWidth=10;ctx.beginPath();ctx.moveTo(x,y-120);ctx.lineTo(x,y-180);ctx.stroke();ctx.fillStyle='#ffdc68';ctx.beginPath();ctx.arc(x,y-190,15,0,Math.PI*2);ctx.fill();
+  }
+  // small story label
+  ctx.fillStyle='#17375dcc';ctx.beginPath();ctx.roundRect(38,45,360,68,18);ctx.fill();
+  ctx.fillStyle='#fff';ctx.font='bold 27px system-ui';ctx.fillText('MY CARTOON STORY',60,88);
+}
+
 function fit(str,max,font){let size=68;ctx.font='800 '+size+'px system-ui';while(ctx.measureText(str).width>max&&size>24){size-=2;ctx.font='800 '+size+'px system-ui'}return '800 '+size+'px system-ui'}
 function draw(t){const time=(t-start)/1000,speed=+$('speed').value,drift=time*speed;let bg=ctx.createLinearGradient(0,0,W,H);
 if(style==='space'){bg.addColorStop(0,'#05071e');bg.addColorStop(.55,'#14245a');bg.addColorStop(1,'#070b20')}else if(style==='neon'){bg.addColorStop(0,'#10051f');bg.addColorStop(.55,'#251044');bg.addColorStop(1,'#061b2c')}else{bg.addColorStop(0,'#091b32');bg.addColorStop(.55,'#284b70');bg.addColorStop(1,'#080d1b')}ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
@@ -41,7 +101,7 @@ if(anim==='fade')alpha=Math.min(1,time/1.5);
 if(anim==='zoom')scale=.65+Math.min(.35,time/2);
 ctx.save();ctx.globalAlpha=alpha;ctx.translate(W/2,H*.70+Math.sin(time*1.2)*7);ctx.scale(scale,scale);ctx.textAlign='center';ctx.shadowColor=style==='neon'?'#4deaff':'#000';ctx.shadowBlur=style==='neon'?30:18;ctx.fillStyle='#fff';ctx.font=fit(title,600,'800 68px system-ui');ctx.fillText(title,0,0);
 if(anim==='glitch'&&Math.floor(time*8)%3===0){ctx.globalAlpha=.55;ctx.fillStyle='#ff3d9a';ctx.fillText(title,5,-4);ctx.fillStyle='#35eaff';ctx.fillText(title,-5,4)}
-ctx.shadowBlur=0;ctx.globalAlpha=alpha;ctx.fillStyle='#d8e7fa';ctx.font='30px system-ui';let sub=$('subline').value.trim();if(sub)ctx.fillText(sub,0,62);ctx.restore();ctx.fillStyle='#ffffff88';ctx.font='18px system-ui';ctx.fillText('MOBILE VIDEO STUDIO',W/2,H-74);ctx.textAlign='left';requestAnimationFrame(draw)}
+ctx.shadowBlur=0;ctx.globalAlpha=alpha;ctx.fillStyle='#d8e7fa';ctx.font='30px system-ui';let sub=$('subline').value.trim();if(sub)ctx.fillText(sub,0,62);ctx.restore();ctx.fillStyle='#ffffff88';ctx.font='18px system-ui';ctx.fillText('MOBILE VIDEO STUDIO',W/2,H-74);ctx.textAlign='left';if($('sceneMode').value==='cartoon')drawCartoon(time);requestAnimationFrame(draw)}
 requestAnimationFrame(draw);
 $('bgUpload').addEventListener('change',e=>{const file=e.target.files&&e.target.files[0];if(!file)return;if(!file.type.startsWith('image/')){status('Please choose an image file.','error');return}const reader=new FileReader();reader.onload=()=>{const img=new Image();img.onload=()=>{bgImage=img;status('Custom background added to your preview.','ok')};img.onerror=()=>status('Could not load that image.','error');img.src=reader.result};reader.readAsDataURL(file)});
 document.querySelectorAll('.style-btn').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.style-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');style=b.dataset.style}));
